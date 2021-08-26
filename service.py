@@ -1,3 +1,4 @@
+from utils import translate_license_plate
 from api import API
 
 
@@ -37,12 +38,18 @@ class SPService:
         methods = []
 
         if method == 'all':
-            methods.extend(['ConsultaMultas', 'ConsultaIPVA', 'ConsultaDPVAT', 'ConsultaLicenciamento'])
+            methods.extend([
+                'ConsultaMultas',
+                'ConsultaIPVA',
+                'ConsultaDPVAT',
+                'ConsultaLicenciamento'
+            ])
         else:
             methods.append(method)
 
         for method in methods:
-            api = API(self.params["license_plate"], self.params["renavam"], method)
+            translated_license_plate = translate_license_plate(self.params["license_plate"])
+            api = API(translated_license_plate, self.params["renavam"], method)
             response_json = api.fetch()
             self.build_debt(response_json)
 
