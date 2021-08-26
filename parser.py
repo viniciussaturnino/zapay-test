@@ -86,6 +86,29 @@ class SPParser:
 
         return collection
 
+    def collect_licensing_debts(self):
+        debt = self.get_debts_from_json('Licenciamento')
+
+        if not debt:
+            return []
+
+        collection = []
+
+        to_collection = {
+            'amount': float(debt.get('TaxaLicenciamento'))/100,
+            'description': debt.get(
+                'DescricaoLicenciamento',
+                f"Licenciamento {debt['Exercicio']}"
+            ),
+            'title': 'Licenciamento',
+            'type': 'licensing',
+            'year': debt.get('Exercicio'),
+        }
+
+        collection.append(to_collection)
+
+        return collection
+
     def get_debts_from_json(self, category):
         try:
             return self.data[category]

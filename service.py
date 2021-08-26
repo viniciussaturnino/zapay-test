@@ -15,6 +15,7 @@ class SPService:
         self.tickets = {}
         self.ipvas = {}
         self.dpvats = {}
+        self.licensing = {}
 
     def build_debt(self, response):
         service = response.get('Servico')
@@ -25,6 +26,8 @@ class SPService:
             self.ipvas = (response.get('IPVAs'))
         elif service == 'DPVAT':
             self.dpvats = (response.get('DPVATs'))
+        elif service == 'Licenciamento':
+            self.licensing = response
 
     def get_json_response(self, method):
         """
@@ -34,7 +37,7 @@ class SPService:
         methods = []
 
         if method == 'all':
-            methods.extend(['ConsultaMultas', 'ConsultaIPVA', 'ConsultaDPVAT'])
+            methods.extend(['ConsultaMultas', 'ConsultaIPVA', 'ConsultaDPVAT', 'ConsultaLicenciamento'])
         else:
             methods.append(method)
 
@@ -56,6 +59,9 @@ class SPService:
 
         elif self.params['debt_option'] == 'dpvat':
             self.get_json_response("ConsultaDPVAT")
+
+        elif self.params['debt_option'] == 'licensing':
+            self.get_json_response("ConsultaLicenciamento")
         
         elif self.params['debt_option'] == 'all':
             self.get_json_response('all')
@@ -67,9 +73,10 @@ class SPService:
             'IPVAs': self.ipvas or {},
             'DPVATs': self.dpvats or {},
             'Multas': self.tickets or {},
+            'Licenciamento': self.licensing or {},
         }
 
-        print(debts)
+        # print(debts)
 
         for debt in debts:
             if debts[debt] == {}:
