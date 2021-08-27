@@ -13,6 +13,7 @@ def translate_license_plate(license_plate):
         'J': '9'
     }
 
-    splited_license_plate[4] = letter_map[splited_license_plate[4].upper()]
+    if not splited_license_plate[4].isdigit():
+        splited_license_plate[4] = letter_map[splited_license_plate[4].upper()]
 
     return ''.join(splited_license_plate)
