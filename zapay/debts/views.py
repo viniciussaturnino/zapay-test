@@ -10,11 +10,20 @@ class DebtsView(APIView):
         query_params = request.GET
         debt_option = query_params.get('debt_option') or 'all'
         
-        request = DebtsRequest(
-            license_plate=query_params.get('license_plate'),
-            renavam=query_params.get('renavam'),
-            debt_option=debt_option,
-        )
+        try:
+            request = DebtsRequest(
+                license_plate=query_params.get('license_plate'),
+                renavam=query_params.get('renavam'),
+                debt_option=debt_option,
+            )
+            result = request.search()     
+        except Exception as exc:
+            return Response(
+                data={
+                    'message': 'Um erro ocorreu!',
+                    'error': f'{exc}'
+                },
+                status=400
+            )
 
-        result = request.search()     
         return Response(result)
