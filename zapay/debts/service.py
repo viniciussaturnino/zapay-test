@@ -1,5 +1,5 @@
-from utils import translate_license_plate
-from api import API
+from debts.utils import translate_license_plate
+from debts.api import API
 
 
 class SPService:
