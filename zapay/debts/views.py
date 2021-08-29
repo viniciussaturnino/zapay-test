@@ -5,8 +5,16 @@ from rest_framework.response import Response
 from debts.requests import DebtsRequest
 
 class DebtsView(APIView):
+    """
+    View Responsavel pelas chamadas
+    HTTP relacionadas aos debitos.
+    """
     
     def get(self, request):
+        """
+        Faz a chamada da API
+        """
+
         query_params = request.GET
         debt_option = query_params.get('debt_option') or 'all'
         
@@ -16,7 +24,7 @@ class DebtsView(APIView):
                 renavam=query_params.get('renavam'),
                 debt_option=debt_option,
             )
-            result = request.search()     
+            result = request.search()
         except Exception as exc:
             return Response(
                 data={

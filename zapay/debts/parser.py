@@ -1,8 +1,20 @@
 class SPParser:
+    """
+    Responsavel por formatar os dados de saida.
+    """
+
     def __init__(self, data):
+        """
+        Construtor
+        """
+
         self.data = data
 
     def collect_ipva_debts(self):
+        """
+        Formatar os dados de IPVA.
+        """
+
         debts = self.get_debts_from_json('IPVAs')
 
         if debts is not None:
@@ -37,6 +49,10 @@ class SPParser:
         return collection
 
     def collect_ticket_debts(self):
+        """
+        Formatar os dados de Multas.
+        """
+
         debts = self.get_debts_from_json('Multas')
 
         if debts is None:
@@ -60,6 +76,10 @@ class SPParser:
         return collection
 
     def collect_insurance_debts(self):
+        """
+        Formatar os dados de DPVAT.
+        """
+
         debts = self.get_debts_from_json('DPVATs')
 
         if debts is not None:
@@ -87,6 +107,10 @@ class SPParser:
         return collection
 
     def collect_licensing_debts(self):
+        """
+        Formatar os dados de Licenciamento.
+        """
+
         debt = self.get_debts_from_json('Licenciamento')
 
         if not debt:
@@ -110,6 +134,10 @@ class SPParser:
         return collection
 
     def get_debts_from_json(self, category):
+        """
+        Retorna a categoria especifica da pesquisa.
+        """
+
         try:
             return self.data[category]
 

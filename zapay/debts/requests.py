@@ -3,14 +3,26 @@ from debts.parser import SPParser
 
 
 class DebtsRequest:
+    """
+    Responsavel pelo chamado ao service da API
+    e tratamento dos dados de entrada.
+    """
 
     def __init__(self, license_plate, renavam, debt_option):
+        """
+        Construtor.
+        """
+
         self.license_plate = license_plate
         self.renavam = renavam
         self.debt_option = debt_option
 
 
     def search(self):
+        """
+        Responsavel pela pesquisa dos dados de retorno.
+        """
+        
         service = SPService(
             license_plate=self.license_plate,
             renavam=self.renavam,

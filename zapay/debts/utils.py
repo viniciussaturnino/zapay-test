@@ -1,4 +1,8 @@
 def translate_license_plate(license_plate):
+    """
+    Responsavel pela traducao da placa do veiculo.
+    """
+
     splited_license_plate = list(license_plate)
     letter_map = {
         'A': '0',

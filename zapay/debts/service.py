@@ -19,6 +19,11 @@ class SPService:
         self.licensing = {}
 
     def build_debt(self, response):
+        """
+        Responsavel pela decisao de retorno
+        do tipo de debito.
+        """
+        
         service = response.get('Servico')
 
         if service == 'Multas':
