@@ -1,8 +1,7 @@
-from utils import translate_license_plate
-from mocks import DATA, RESULT
-from service import SPService
-from parser import SPParser
-
+from debts.utils import translate_license_plate
+from debts.tests.mocks import DATA, RESULT
+from debts.service import SPService
+from debts.parser import SPParser
 
 def test_translate_license_plate():
     license_plate = "ABC1C34"
