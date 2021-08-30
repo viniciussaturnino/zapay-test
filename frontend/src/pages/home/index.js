@@ -5,6 +5,7 @@ import { Formik } from 'formik';
 import schema from './validationSchema';
 import { getDebts } from '../../services/debts';
 import ModalComp from '../../components/modal';
+import { toast } from 'react-toastify';
 
 export default function Home() {
     const [results, setResults] = useState([])
@@ -22,7 +23,10 @@ export default function Home() {
                 setResults(response.data)
                 setOpen(true)
             })
-            .catch((error) => {})
+            .catch((error) => {
+                const message = error.response.data.message
+                toast.error(message);
+            })
     }
 
     return (
