@@ -38,18 +38,15 @@ class DebtsRequest:
 
         result = []
 
-        if self.debt_option == "ticket":
-            result = parser.collect_ticket_debts()
-        elif self.debt_option == "ipva":
-            result = parser.collect_ipva_debts()
-        elif self.debt_option == "dpvat":
-            result = parser.collect_insurance_debts()
-        elif self.debt_option == "licensing":
-            result = parser.collect_licensing_debts()
-        elif self.debt_option == "all":
-            result.append(parser.collect_ticket_debts())
-            result.append(parser.collect_ipva_debts())
-            result.append(parser.collect_insurance_debts())
-            result.append(parser.collect_licensing_debts())
+        switch = {
+            "ticket": parser.collect_ticket_debts,
+            "ipva": parser.collect_ipva_debts,
+            "dpvat": parser.collect_insurance_debts,
+            "licensing": parser.collect_licensing_debts,
+            "all": parser.collect_all_debts,
+        }
+
+        case = switch.get(self.debt_option, 'all')
+        result = case()
 
         return result

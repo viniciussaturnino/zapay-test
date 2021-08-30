@@ -133,6 +133,29 @@ class SPParser:
 
         return collection
 
+    def collect_all_debts(self):
+        """
+        Formatar os dados de todos os debitos.
+        """
+        options = ['Licenciamento', 'DPVATs', 'IPVAs', 'Multas']
+        collection = []
+
+        for option in options:
+            if option != 'Licenciamento':
+                switch = {
+                    "Multas": self.collect_ticket_debts,
+                    "IPVAs": self.collect_ipva_debts,
+                    "DPVATs": self.collect_insurance_debts,
+                }
+
+                case = switch.get(option)
+                result = case()
+            else:
+                result = self.collect_licensing_debts()
+
+            collection.extend(result)
+        return collection
+
     def get_debts_from_json(self, category):
         """
         Retorna a categoria especifica da pesquisa.

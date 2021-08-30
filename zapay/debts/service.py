@@ -63,23 +63,19 @@ class SPService:
         Pega os débitos de acordo com a opção passada.
         """
 
-        if self.params['debt_option'] == 'ticket':
-            self.get_json_response("ConsultaMultas")
+        switch = {
+            "ticket": "ConsultaMultas",
+            "ipva": "ConsultaIPVA",
+            "dpvat": "ConsultaDPVAT",
+            "licensing": "ConsultaLicenciamento",
+            "all": "all",
+        }
 
-        elif self.params['debt_option'] == 'ipva':
-            self.get_json_response("ConsultaIPVA")
-
-        elif self.params['debt_option'] == 'dpvat':
-            self.get_json_response("ConsultaDPVAT")
-
-        elif self.params['debt_option'] == 'licensing':
-            self.get_json_response("ConsultaLicenciamento")
-        
-        elif self.params['debt_option'] == 'all':
-            self.get_json_response('all')
-
-        else:
+        case = switch.get(self.params['debt_option'], None)
+        if not case:
             raise Exception("opção inválida")
+        self.get_json_response(case)
+
         
         debts = {
             'IPVAs': self.ipvas or {},
