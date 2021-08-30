@@ -64,3 +64,13 @@ export const Button = styled.button`
         filter: brightness(90%)
     }
 `;
+
+export const Error = styled.div`
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: red;
+  margin-top: 0.5rem;
+  opacity: 1;
+  text-align: left;
+  transition: all 300ms ease 100ms;
+`;

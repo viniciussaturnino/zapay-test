@@ -2,10 +2,11 @@ import React from 'react';
 import ReactSelect from 'react-select';
 
 const options = [
-    {value: '', label: 'IPVA'},
-    {value: '', label: 'DPVAT'},
-    {value: '', label: 'Multas'},
-    {value: '', label: 'Licenciamento'},
+    {value: 'ipva', label: 'IPVA'},
+    {value: 'dpvat', label: 'DPVAT'},
+    {value: 'ticket', label: 'Multas'},
+    {value: 'licensing', label: 'Licenciamento'},
+    {value: '', label: 'Todos'},
 ]
 
 const customStyles = {
@@ -33,12 +34,13 @@ const customStyles = {
     })
 }
 
-export default function Select() {
+export default function Select({onChange}) {
     return (
         <ReactSelect 
             options={options}
             styles={customStyles}
             placeholder='Opção de busca'
+            onChange={(e) => onChange(e.value)}
         />
     );
 }
